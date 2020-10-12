@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="HCSampleApp.Views.MainView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:HCSampleApp.ViewModels"
+    Title="Health Check">
+    <ContentPage.BindingContext>
+        <vm:MainViewModel />
+    </ContentPage.BindingContext>
+    <StackLayout Padding="30,30,30,0">
+        <StackLayout>
+            <Button
+                BackgroundColor="DodgerBlue"
+                Command="{Binding PairTempCommand}"
+                FontSize="15"
+                HorizontalOptions="CenterAndExpand"
+                Text="Pair Temprueture"
+                TextColor="White"
+                VerticalOptions="CenterAndExpand"
+                WidthRequest="380" />
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <Button
+                BackgroundColor="MediumSeaGreen"
+                Command="{Binding StartTempCommand}"
+                FontSize="15"
+                HorizontalOptions="CenterAndExpand"
+                Text="Start Measuring"
+                TextColor="White"
+                VerticalOptions="CenterAndExpand"
+                WidthRequest="180" />
+            <Button
+                BackgroundColor="IndianRed"
+                Command="{Binding StopTempCommand}"
+                FontSize="15"
+                HorizontalOptions="CenterAndExpand"
+                Text="Stop Measuring"
+                TextColor="White"
+                VerticalOptions="CenterAndExpand"
+                WidthRequest="180" />
+        </StackLayout>
+        <ListView
+            HorizontalOptions="Center"
+            ItemsSource="{Binding TempList}"
+            VerticalOptions="Center">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Padding="10">
+                            <Label Text="{Binding ., Mode=OneWay}" VerticalOptions="CenterAndExpand" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>
