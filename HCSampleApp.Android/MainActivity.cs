@@ -7,6 +7,7 @@ using Android.OS;
 using Acr.UserDialogs;
 using HCSampleApp.Droid.Temprueture;
 using System.IO;
+using System.Text;
 
 namespace HCSampleApp.Droid
 {
@@ -39,7 +40,7 @@ namespace HCSampleApp.Droid
             {
                 BleReader = new VDIBleThermometer(this);
             }
-            
+
             BleReader.SetListener(this);
 
             TempruetureHandler tempHandler = new TempruetureHandler();
@@ -72,7 +73,7 @@ namespace HCSampleApp.Droid
                         break;
 
                     case (int)Enums.MESSAGE_TEMPERATURE_UPDATE:
-                        LogData(response);
+                        GetDisplayTemperatureResultString((BleData)msg.Obj);
                         break;
 
                     case (int)Enums.MESSAGE_CHARGER_INFO_UPDATED:
@@ -107,6 +108,41 @@ namespace HCSampleApp.Droid
                 }
             }
 
+            string GetDisplayTemperatureResultString(BleData data)
+            {
+                string deviceId = data.GetDeviceId();
+                int batteryPercent = data.GetBatteryPercent();
+                float temperature = data.GetTemperatureValue();
+                float finalTemperature = data.GetreadonlyTemperatureValue();
+
+                VDIType.TEMPERATURE_STATUS status = data.GetTemperatureStatus();
+
+                string statusString = "";
+
+                if (status == VDIType.TEMPERATURE_STATUS.Normal)
+                {
+                    statusString = "temperatureNormal";
+                }
+                else if (status == VDIType.TEMPERATURE_STATUS.Warmup)
+                {
+                    statusString = "temperatureWarmUp";
+                }
+
+                StringBuilder result = new StringBuilder("deviceId");
+                result.Append(" ").Append(deviceId);
+
+                string currentTime = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+
+                LogData(deviceId + ", " + currentTime +
+                        ", raw temperature " + temperature + ", final temperature " + finalTemperature +
+                        ", " + statusString + ", battery " + batteryPercent + "%" + ", FW " + data.GetFW() +
+                        ", mac " + data.GetMac() + ", rssi " + data.GetRSSI());
+
+                result.Append("  ").Append(finalTemperature).Append("  ").Append(batteryPercent).Append("%").Append("\r\n");
+
+                return result.ToString();
+            }
+
             void LogData(string content)
             {
                 string rootPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData);
@@ -114,7 +150,7 @@ namespace HCSampleApp.Droid
 
                 using var writer = new StreamWriter(path, append: true);
 
-                writer.WriteLine($"{DateTime.Now} - Temp : {content}");
+                writer.WriteLine($"Temperature : {content}");
             }
         }
     }

@@ -21,7 +21,9 @@ namespace HCSampleApp.Droid.Temprueture
         public void Destroy()
         {
             if (mHandlerRef != null)
-                mHandlerRef.SetTarget(null); // ??
+                // Convert from mHandlerRef.clear(); to line below
+                mHandlerRef.SetTarget(null);
+
             if (mBleReader != null)
                 mBleReader.Destroy();
 
@@ -70,6 +72,7 @@ namespace HCSampleApp.Droid.Temprueture
             }
             else
             {
+                // Convert from mHandlerRef.clear(); to line below
                 mHandlerRef.SetTarget(null);
                 mHandlerRef = null;
                 mHandlerRef = new WeakReference<Handler>(handler);
@@ -85,7 +88,8 @@ namespace HCSampleApp.Droid.Temprueture
                 return;
             }
 
-            mHandlerRef.TryGetTarget(out Handler handler);
+            // Convert from Handler handler = mHandlerRef.get(); to line below
+            mHandlerRef.TryGetTarget(out Handler handler); 
 
             if (handler == null)
             {
@@ -112,6 +116,7 @@ namespace HCSampleApp.Droid.Temprueture
                 return;
             }
 
+            // Convert from Handler handler = mHandlerRef.get(); to line below
             mHandlerRef.TryGetTarget(out Handler handler);
 
             if (handler == null)
@@ -143,6 +148,7 @@ namespace HCSampleApp.Droid.Temprueture
                 return;
             }
 
+            // Convert from Handler handler = mHandlerRef.get(); to line below
             mHandlerRef.TryGetTarget(out Handler handler);
 
             if (handler == null)
@@ -163,6 +169,7 @@ namespace HCSampleApp.Droid.Temprueture
                 return;
             }
 
+            // Convert from Handler handler = mHandlerRef.get(); to line below
             mHandlerRef.TryGetTarget(out Handler handler);
 
             if (handler == null)
@@ -183,6 +190,7 @@ namespace HCSampleApp.Droid.Temprueture
                 return;
             }
 
+            // Convert from Handler handler = mHandlerRef.get(); to line below
             mHandlerRef.TryGetTarget(out Handler handler);
 
             if (handler == null)
@@ -210,6 +218,7 @@ namespace HCSampleApp.Droid.Temprueture
                 return;
             }
 
+            // Convert from Handler handler = mHandlerRef.get(); to line below
             mHandlerRef.TryGetTarget(out Handler handler);
 
             if (handler == null)
@@ -230,6 +239,7 @@ namespace HCSampleApp.Droid.Temprueture
                 return;
             }
 
+            // Convert from Handler handler = mHandlerRef.get(); to line below
             mHandlerRef.TryGetTarget(out Handler handler);
 
             if (handler == null)
@@ -250,6 +260,7 @@ namespace HCSampleApp.Droid.Temprueture
                 return;
             }
 
+            // Convert from Handler handler = mHandlerRef.get(); to line below
             mHandlerRef.TryGetTarget(out Handler handler);
 
             if (handler == null)
