@@ -41,7 +41,7 @@ namespace HCSampleApp.Droid
                 BleReader = new VDIBleThermometer(this);
             }
 
-            BleReader.SetListener(this);
+            BleReader.SetListener(new BleManager(this));
 
             TempruetureHandler tempHandler = new TempruetureHandler();
 

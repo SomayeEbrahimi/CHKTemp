@@ -1,8 +1,10 @@
 ﻿using Android.Content;
 using Android.OS;
+using Android.Runtime;
 using Com.Vivalnk.Model;
 using Com.Vivalnk.Vdireader;
 using Com.Vivalnk.Vdireaderimpl;
+using Java.Interop;
 using System;
 
 namespace HCSampleApp.Droid.Temprueture
@@ -17,6 +19,16 @@ namespace HCSampleApp.Droid.Temprueture
         private Context mContext;
 
         private WeakReference<Handler> mHandlerRef;
+
+        IntPtr IJavaObject.Handle => throw new NotImplementedException();
+
+        int IJavaPeerable.JniIdentityHashCode => throw new NotImplementedException();
+
+        JniObjectReference IJavaPeerable.PeerReference => throw new NotImplementedException();
+
+        JniPeerMembers IJavaPeerable.JniPeerMembers => throw new NotImplementedException();
+
+        JniManagedPeerStates IJavaPeerable.JniManagedPeerState => throw new NotImplementedException();
 
         public void Destroy()
         {
@@ -48,7 +60,7 @@ namespace HCSampleApp.Droid.Temprueture
             return mInstance;
         }
 
-        private BleManager(Context context)
+        public BleManager(Context context)
         {
             mContext = context;
 
@@ -271,6 +283,46 @@ namespace HCSampleApp.Droid.Temprueture
 
             handler.ObtainMessage((int)Enums.MESSAGE_PHONE_LOCATION_OFF)
                     .SendToTarget();
+        }
+
+        void IJavaPeerable.SetJniIdentityHashCode(int value)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IJavaPeerable.SetPeerReference(JniObjectReference reference)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IJavaPeerable.SetJniManagedPeerState(JniManagedPeerStates value)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IJavaPeerable.UnregisterFromRuntime()
+        {
+            throw new NotImplementedException();
+        }
+
+        void IJavaPeerable.DisposeUnlessReferenced()
+        {
+            throw new NotImplementedException();
+        }
+
+        void IJavaPeerable.Disposed()
+        {
+            throw new NotImplementedException();
+        }
+
+        void IJavaPeerable.Finalized()
+        {
+            throw new NotImplementedException();
+        }
+
+        void IDisposable.Dispose()
+        {
+            throw new NotImplementedException();
         }
     }
 }
